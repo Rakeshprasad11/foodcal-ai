@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/foodcal-ai/static/css/main.371cd350.css",
-    "main.js": "/foodcal-ai/static/js/main.12f40934.js",
+    "main.css": "/foodcal-ai/static/css/main.6e518674.css",
+    "main.js": "/foodcal-ai/static/js/main.aa77e08e.js",
     "index.html": "/foodcal-ai/index.html",
-    "main.371cd350.css.map": "/foodcal-ai/static/css/main.371cd350.css.map",
-    "main.12f40934.js.map": "/foodcal-ai/static/js/main.12f40934.js.map"
+    "main.6e518674.css.map": "/foodcal-ai/static/css/main.6e518674.css.map",
+    "main.aa77e08e.js.map": "/foodcal-ai/static/js/main.aa77e08e.js.map"
   },
   "entrypoints": [
-    "static/css/main.371cd350.css",
-    "static/js/main.12f40934.js"
+    "static/css/main.6e518674.css",
+    "static/js/main.aa77e08e.js"
   ]
 }

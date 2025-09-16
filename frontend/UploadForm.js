@@ -1,66 +1,43 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-export default function UploadForm() {
-  const [image, setImage] = useState(null);
+function MealUploader() {
+  const [file, setFile] = useState(null);
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState(false);
 
-  // 🔽 ADD FUNCTION HERE
-  const analyzeImage = async (imageData) => {
-    setLoading(true);
-    setResult(null);
+  const handleFileChange = (e) => setFile(e.target.files[0]);
 
-    try {
-      const formData = new FormData();
-      const blob = await (await fetch(imageData)).blob();
-      formData.append("image", blob, "food.jpg");
+  const handleSubmit = async () => {
+    if (!file) return alert("Please upload an image");
+    const formData = new FormData();
+    formData.append('image', file);
 
-      const response = await fetch("http://localhost:8000/analyze", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-      if (data.error) throw new Error(data.error);
-
-      setResult({
-        food: data.food,
-        confidence: data.confidence,
-      });
-    } catch (error) {
-      console.error("Error analyzing image:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setImage(URL.createObjectURL(file));
-    }
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (image) analyzeImage(image); // <-- Call the function when form is submitted
+    const res = await fetch('http://127.0.0.1:5000/predict', {
+      method: 'POST',
+      body: formData
+    });
+    const data = await res.json();
+    setResult(data);
   };
 
   return (
-    <div>
-      <h1>Upload Your Food</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="file" onChange={handleFileChange} accept="image/*" />
-        <button type="submit">Analyze</button>
-      </form>
-
-      {loading && <p>Analyzing...</p>}
+    <div className="container">
+      <h1>Nutri.ai</h1>
+      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <br /><br />
+      <button onClick={handleSubmit}>Analyze Meal</button>
       {result && (
-        <div>
-          <h3>Food: {result.food}</h3>
-          <p>Confidence: {Math.round(result.confidence * 100)}%</p>
+        <div style={{marginTop: '20px'}}>
+          <h3>Results:</h3>
+          <p>Calories: {result.calories} kcal</p>
+          <p>Protein: {result.protein} g</p>
+          <p>Carbs: {result.carbs} g</p>
+          <p>Fat: {result.fat} g</p>
+          <p>Fiber: {result.fiber} g</p>
+          <p>Vitamins: {JSON.stringify(result.vitamins)}</p>
         </div>
       )}
     </div>
   );
 }
+
+export default MealUploader;

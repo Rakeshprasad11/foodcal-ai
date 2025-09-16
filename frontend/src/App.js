@@ -1,12 +1,7 @@
-import React from "react";
-
+import React from 'react';
+import MealUploader from './components/MealUploader';
 function App() {
-  return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <h1>Welcome to FoodCal AI 🍽️</h1>
-      <p>Your AI-powered food calorie & nutrition analyzer is running!</p>
-    </div>
-  );
+  return <MealUploader />;
 }
 
 export default App;
