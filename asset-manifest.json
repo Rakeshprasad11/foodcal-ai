@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/foodcal-ai/static/css/main.371cd350.css",
+    "main.js": "/foodcal-ai/static/js/main.12f40934.js",
+    "index.html": "/foodcal-ai/index.html",
+    "main.371cd350.css.map": "/foodcal-ai/static/css/main.371cd350.css.map",
+    "main.12f40934.js.map": "/foodcal-ai/static/js/main.12f40934.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.371cd350.css",
+    "static/js/main.12f40934.js"
+  ]
+}
