@@ -1,21 +1,20 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
-from model import predict_calories
+import os
 
 app = Flask(__name__)
-CORS(app)
 
-@app.route('/')
+@app.route("/")
 def home():
-    return "Nutri.ai Backend Running"
+    return jsonify({"message": "FoodCal AI Backend is running!"})
 
-@app.route('/predict', methods=['POST'])
-def predict():
-    if 'image' not in request.files:
-        return jsonify({'error': 'No image provided'}), 400
-    image = request.files['image']
-    result = predict_calories(image)
-    return jsonify(result)
+@app.route("/analyze", methods=["POST"])
+def analyze():
+    data = request.json
+    food_name = data.get("food")
+    return jsonify({
+        "food": food_name,
+        "api_key_used": "6914b0e746aa4b13858ca0583e9e0ae7"  # remove later
+    })
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
